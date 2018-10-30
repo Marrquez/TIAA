@@ -8,11 +8,15 @@ import { AppComponent } from './app.component';
  * custom components
  * */
 import { BaseComponent } from './components/base/base.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NewEditComponent } from './components/new-edit/new-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BaseComponent
+    BaseComponent,
+    DashboardComponent,
+    NewEditComponent
   ],
   imports: [
     BrowserModule,
