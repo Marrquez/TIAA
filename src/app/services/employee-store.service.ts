@@ -14,11 +14,14 @@ export class EmployeeStoreService {
 
   constructor(private http: Http) { }
 
+  /**
+   * Only for test the Globlal store and State
+   * */
   searchEmployees(queryTitle: string): Observable<Employee[]> {
     return this.http.get(`${this.API_PATH}?q=${queryTitle}`)
       .map(
         res =>
-          res.json().items || [{volumeInfo: {title: "A"}}]
+          res.json().items || []
       );
   }
 }

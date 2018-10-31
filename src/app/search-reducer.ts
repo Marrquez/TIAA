@@ -13,28 +13,33 @@ export interface State {
  * the reducer initial state
  * */
 const initialState: State = {
-  searchTerms: '';
+  searchTerms: '',
   results: []
 };
 
-export function reducer(state: initialState = initialState, action: SearchActions.All): State {
+export function reducer(state = initialState, action: SearchActions.All): State {
   switch (action.type) {
-    case SearchActions.SEARCH: {
+    case SearchActions.SEARCH:
       return {
         ...state,
         searchTerms: action.payload
       };
-    }
+    break;
 
-    case SearchActions.SEARCH_SUCCESS: {
+    case SearchActions.SEARCH_SUCCESS:
       return {
         ...state,
         results: action.payload
       };
-    }
+    break;
 
-    default: {
+    case SearchActions.ADD:
+      state.results.push(action.payload);
       return state;
-    }
+      break;
+
+    default:
+      return state;
+    break;
   }
 }
