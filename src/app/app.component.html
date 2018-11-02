@@ -1,1 +1,3 @@
-<router-outlet></router-outlet>
+<div [ngClass]="{'int ': employeeService.searchText != '' }">
+  <router-outlet></router-outlet>
+</div>

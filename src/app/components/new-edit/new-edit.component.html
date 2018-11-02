@@ -1,7 +1,95 @@
-<div style="text-align:center">
-  <h1>
-    {{ title }}!
-  </h1>
-  Hi there from new/edit!
+<div class="new-edit-container container">
+  <br>
+  <br>
+  <h3>New Employee / Editing: ...</h3>
+  <br>
+  <form [formGroup]="loginForm" role="form" (ngSubmit)="login()">
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label class="lbl" for="name">Name</label>
+        <input type="text" name="name" id="name" formControlName="name">
+      </div>
+      <div class="col-sm-6">
+        <label class="lbl" for="area">area</label>
+        <div class="tabs">
+          <input type="checkbox" name="area" id="area" formControlName="area">
+          <span>Services</span>
+          <span>Kitchen</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label class="lbl" for="dob">Dob</label>
+        <div>
+          <input [matDatepicker]="dobDatepicker" name="dob" id="dob" formControlName="dob" [max]="minAge">
+          <mat-datepicker-toggle [for]="dobDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #dobDatepicker></mat-datepicker>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <app-job-title></app-job-title>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label class="lbl" for="country">Country</label>
+        <select formControlName="country" name="country" id="country" >
+          <option>Colombia</option>
+          <option>USA</option>
+          <option>Canada</option>
+        </select>
+      </div>
+      <div class="col-sm-6">
+        <label class="lbl" for="tipRate">Tip Rate</label>
+        <input type="number" name="tipRate" id="tipRate" formControlName="tipRate">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label class="lbl" for="username">Username</label>
+        <input type="text" name="username" id="username" formControlName="username">
+      </div>
+      <div class="col-sm-6"></div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label class="lbl" for="hireDate">Hire Date</label>
+        <div>
+          <input [matDatepicker]="hdDatepicker" name="hireDate" id="hireDate" formControlName="hireDate" >
+          <mat-datepicker-toggle [for]="hdDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #hdDatepicker></mat-datepicker>
+        </div>
+      </div>
+      <div class="col-sm-6"></div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label class="lbl" for="status">Status</label>
+        <!-- Rounded switch -->
+        <label class="switch">
+          <input type="checkbox" name="status" id="status" formControlName="status">
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+
+    <div formArrayName="names">
+      <div *ngFor="let item of namesArray.controls; let i = index">
+        <input type="text" [formControlName]="i">
+        <br/><br/>
+      </div>
+    </div>
+    <br>
+    <button (click)="goBack();" type="button"><i class="fa fa-chevron-left"></i>Back</button>
+    <button type="submit" class="btn btn-sm btn-small btn-primary">Save</button>
+  </form>
+
+  <button (click)="add()">Add</button>
 </div>
 

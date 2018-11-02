@@ -1,0 +1,32 @@
+:host {
+  .search-results-container {
+    display: none;
+
+    table {
+      tr {
+        td {
+          padding: 3px;
+          position:relative;
+
+          i {
+            cursor: pointer;
+            font-size: 11px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            width: 25px;
+          }
+        }
+
+        .actions {
+          width: 85px;
+        }
+      }
+    }
+  }
+}
+:host-context(.int) {
+  .search-results-container {
+    display: block;
+  }
+}

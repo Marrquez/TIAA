@@ -1,5 +1,8 @@
 <div>
-  <i class="fa fa-plus"></i>
-  <input type="text" placeholder="Type to search...">
+  <i (click)="addElement()" class="fa fa-plus"></i>
+  <input type="text"
+         placeholder="Type to search..."
+         (keyup)="onSearch($event)">
   <i class="fa fa-search"></i>
 </div>
+<span>Welcome!</span>

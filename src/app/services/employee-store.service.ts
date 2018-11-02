@@ -10,6 +10,7 @@ import { Employee } from '../models/Employee';
 
 @Injectable()
 export class EmployeeStoreService {
+  public searchText= '';
   private API_PATH = 'https://www.googleapis.com/books/v1/volumes';
 
   constructor(private http: Http) { }
@@ -18,6 +19,7 @@ export class EmployeeStoreService {
    * Only for test the Globlal store and State
    * */
   searchEmployees(queryTitle: string): Observable<Employee[]> {
+    this.searchText = queryTitle;
     return this.http.get(`${this.API_PATH}?q=${queryTitle}`)
       .map(
         res =>

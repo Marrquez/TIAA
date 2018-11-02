@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +30,8 @@ import { reducers } from './reducers';
 import { ResultsCountComponent } from './components/count/results-count.component';
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './employee.effects';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { JobTitleComponent } from './components/job-title/job-title.component';
 
 @NgModule({
   declarations: [
@@ -35,18 +40,25 @@ import { EmployeeEffects } from './employee.effects';
     DashboardComponent,
     NewEditComponent,
     ResultsCountComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    SearchResultsComponent,
+    JobTitleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     HttpModule,
-    EffectsModule.forRoot([EmployeeEffects])
+    EffectsModule.forRoot([EmployeeEffects]),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     EmployeeStoreService,
-    { provide: LocationStrategy, useClass: PathLocationStrategy }
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    MatDatepickerModule
   ],
   bootstrap: [AppComponent]
 })
