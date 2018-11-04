@@ -1,7 +1,4 @@
 <label class="lbl" for="jobTitle">Job title</label>
 <select>
-  <option>a</option>
-  <option>b</option>
-  <option>c</option>
+  <option *ngFor="let jt of jobTitle | async">{{jt}}</option>
 </select>
-

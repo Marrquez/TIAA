@@ -7,6 +7,7 @@ import { Employee } from './models/Employee'
 export const SEARCH = '[Employees] Search';
 export const SEARCH_SUCCESS = '[Employees] Search Success';
 export const ADD = '[Employees] Add';
+export const UPDATE_AREA = '[Employees] Update Area';
 
 /**
  * Actions
@@ -29,6 +30,12 @@ export class AddEmployee implements Action {
   constructor(public payload: Employee){};
 }
 
+export class UpdateArea implements Action {
+  readonly type = UPDATE_AREA;
+
+  constructor(public payload: string){};
+}
+
 export type All
   = Search
-   | SearchSuccess | AddEmployee;
+   | SearchSuccess | AddEmployee | UpdateArea;

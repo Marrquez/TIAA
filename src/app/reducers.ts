@@ -20,3 +20,11 @@ export function selectCount(state: State) {
 export function selectTerms(state: State) {
   return state.search.searchTerms;
 };
+
+export function selectArea(state: State) {
+  return state.search.area;
+};
+
+export function selectJobTitle(state: State) {
+  return state.search.jobTitle;
+};

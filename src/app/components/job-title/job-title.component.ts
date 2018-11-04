@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+/**
+ * global state
+ * */
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-job-title',
@@ -6,8 +13,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./job-title.component.less']
 })
 export class JobTitleComponent implements OnInit {
-
-  constructor() { }
+  jobTitle: Observable<Array<string>>;
+  constructor(
+    private store: Store<fromRoot.State>
+  ) {
+    this.jobTitle = store.select(fromRoot.selectJobTitle);
+  }
 
   ngOnInit() {
   }

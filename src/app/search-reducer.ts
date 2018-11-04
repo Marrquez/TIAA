@@ -5,8 +5,10 @@ import * as SearchActions from './search-actions';
  * the reducer state
  * */
 export interface State {
-  searchTerms: string;
-  results: Employee[]
+  searchTerms: string,
+  results: Employee[],
+  area: string,
+  jobTitle: Array<string>
 };
 
 /**
@@ -14,7 +16,9 @@ export interface State {
  * */
 const initialState: State = {
   searchTerms: '',
-  results: []
+  results: [],
+  area: 'Services',
+  jobTitle: ["Manager", "Host", "Tuttofare", "Waitress", "Dining room manager"]
 };
 
 export function reducer(state = initialState, action: SearchActions.All): State {
@@ -36,6 +40,15 @@ export function reducer(state = initialState, action: SearchActions.All): State 
     case SearchActions.ADD:
       state.results.push(action.payload);
       return state;
+      break;
+
+    case SearchActions.UPDATE_AREA:
+      var jobTitle = action.payload === "Services" ? ["Manager", "Host", "Tuttofare", "Waitress", "Dining room manager"] : ["Chef", "Sous Chef", "Dishwasher", "Cook"];
+      return {
+        ...state,
+        area: action.payload,
+        jobTitle: jobTitle
+      };
       break;
 
     default:

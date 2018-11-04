@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './employee.effects';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { JobTitleComponent } from './components/job-title/job-title.component';
+import { AreaComponent } from './components/area/area.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { JobTitleComponent } from './components/job-title/job-title.component';
     ResultsCountComponent,
     SearchBarComponent,
     SearchResultsComponent,
-    JobTitleComponent
+    JobTitleComponent,
+    AreaComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { JobTitleComponent } from './components/job-title/job-title.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FormsModule
   ],
   providers: [
     EmployeeStoreService,

@@ -14,7 +14,6 @@ export class NewEditComponent {
 
   loginForm: FormGroup = this.builder.group({
     name: new FormControl(''),
-    area: new FormControl({value: 'n/a', disabled: false}),
     dob: new FormControl(''),
     country: new FormControl(''),
     tipRate: new FormControl(''),

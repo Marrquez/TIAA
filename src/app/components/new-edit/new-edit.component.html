@@ -10,19 +10,14 @@
         <input type="text" name="name" id="name" formControlName="name">
       </div>
       <div class="col-sm-6">
-        <label class="lbl" for="area">area</label>
-        <div class="tabs">
-          <input type="checkbox" name="area" id="area" formControlName="area">
-          <span>Services</span>
-          <span>Kitchen</span>
-        </div>
+        <app-area></app-area>
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-sm-6">
         <label class="lbl" for="dob">Dob</label>
-        <div>
+        <div class="datepicker">
           <input [matDatepicker]="dobDatepicker" name="dob" id="dob" formControlName="dob" [max]="minAge">
           <mat-datepicker-toggle [for]="dobDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #dobDatepicker></mat-datepicker>
@@ -59,7 +54,7 @@
     <div class="form-group row">
       <div class="col-sm-6">
         <label class="lbl" for="hireDate">Hire Date</label>
-        <div>
+        <div class="datepicker">
           <input [matDatepicker]="hdDatepicker" name="hireDate" id="hireDate" formControlName="hireDate" >
           <mat-datepicker-toggle [for]="hdDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #hdDatepicker></mat-datepicker>
