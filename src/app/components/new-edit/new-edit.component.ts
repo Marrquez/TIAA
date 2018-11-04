@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+/**
+ * services
+ * */
+import { CountryStoreService } from '../../services/country-store.service';
+
 @Component({
   selector: 'new-edit',
   templateUrl: './new-edit.component.html',
@@ -25,15 +30,20 @@ export class NewEditComponent {
 
   constructor (
     private builder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private countryService: CountryStoreService
   ) {
     this.minAge = new Date(this.today.getFullYear() - this.minAge, this.today.getMonth(), this.today.getDate());
+  }
+
+  ngOnInit() {
+    this.countryService.searchCountries();
   }
 
   login() {
     console.log(this.loginForm.value);
     console.log(this.loginForm.status);
-    // Attempt Logging in...
+
     //this.store.dispatch(new SearchActions.AddEmployee({id:1, volumeInfo: {title: "Hi Cristian"}}));
   }
 

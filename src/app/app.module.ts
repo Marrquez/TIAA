@@ -22,6 +22,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
  * services
  * */
 import { EmployeeStoreService } from './services/employee-store.service';
+import { CountryStoreService } from './services/country-store.service';
 
 /**
  * external components
@@ -61,6 +62,7 @@ import { AreaComponent } from './components/area/area.component';
   ],
   providers: [
     EmployeeStoreService,
+    CountryStoreService,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     MatDatepickerModule
   ],

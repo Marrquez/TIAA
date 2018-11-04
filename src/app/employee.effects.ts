@@ -6,6 +6,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 
 import * as SearchActions from './search-actions';
 import { EmployeeStoreService } from './services/employee-store.service';
+import { CountryStoreService } from './services/country-store.service';
 
 @Injectable()
 export class EmployeeEffects {
@@ -23,8 +24,22 @@ export class EmployeeEffects {
     )
   );
 
+  @Effect()
+  search_countries$: Observable<Action> = this.actions$.pipe(
+    ofType(SearchActions.SEARCH_COUNTRIES),
+    mergeMap((action: SearchActions.SearchCountries) =>
+      this.countryService.getCountries().pipe(
+        // If successful, dispatch success action with result
+        map(data => new SearchActions.SearchCountriesSuccess(data)),
+        // If request fails, dispatch failed action
+        catchError(() => of({ type: 'FAILED' }))
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
-    private employeeService: EmployeeStoreService
+    private employeeService: EmployeeStoreService,
+    private countryService: CountryStoreService
   ) {}
 }

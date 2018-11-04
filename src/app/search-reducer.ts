@@ -1,4 +1,5 @@
 import { Employee } from './models/Employee'
+import { Country } from './models/Country'
 import * as SearchActions from './search-actions';
 
 /**
@@ -8,7 +9,8 @@ export interface State {
   searchTerms: string,
   results: Employee[],
   area: string,
-  jobTitle: Array<string>
+  jobTitle: Array<string>,
+  countries: Country[]
 };
 
 /**
@@ -18,7 +20,8 @@ const initialState: State = {
   searchTerms: '',
   results: [],
   area: 'Services',
-  jobTitle: ["Manager", "Host", "Tuttofare", "Waitress", "Dining room manager"]
+  jobTitle: ["Manager", "Host", "Tuttofare", "Waitress", "Dining room manager"],
+  countries: []
 };
 
 export function reducer(state = initialState, action: SearchActions.All): State {
@@ -29,6 +32,19 @@ export function reducer(state = initialState, action: SearchActions.All): State 
         searchTerms: action.payload
       };
     break;
+
+    case SearchActions.SEARCH_COUNTRIES:
+      return {
+        ...state
+      };
+      break;
+
+    case SearchActions.SEARCH_COUNTRIES_SUCCESS:
+      return {
+        ...state,
+        countries: action.payload
+      };
+      break;
 
     case SearchActions.SEARCH_SUCCESS:
       return {

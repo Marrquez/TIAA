@@ -13,6 +13,10 @@ export function selectResults(state: State) {
   return state.search.results;
 };
 
+export function selectCountries(state: State){
+  return state.search.countries;
+}
+
 export function selectCount(state: State) {
   return state.search.results.length;
 };

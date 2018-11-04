@@ -32,9 +32,7 @@
       <div class="col-sm-6">
         <label class="lbl" for="country">Country</label>
         <select formControlName="country" name="country" id="country" >
-          <option>Colombia</option>
-          <option>USA</option>
-          <option>Canada</option>
+          <option *ngFor="let country of countryService.countries | async">{{ country.name }}</option>
         </select>
       </div>
       <div class="col-sm-6">
