@@ -2,10 +2,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 /**
- * global state
+ * services
  * */
-import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
+import { EmployeeStoreService } from '../../services/employee-store.service';
 
 @Component({
   selector: 'app-job-title',
@@ -13,14 +12,10 @@ import * as fromRoot from '../../reducers';
   styleUrls: ['./job-title.component.less']
 })
 export class JobTitleComponent implements OnInit {
-  jobTitle: Observable<Array<string>>;
   constructor(
-    private store: Store<fromRoot.State>
-  ) {
-    this.jobTitle = store.select(fromRoot.selectJobTitle);
-  }
+    private employeeService: EmployeeStoreService
+  ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

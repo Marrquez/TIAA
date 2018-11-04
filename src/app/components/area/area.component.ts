@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 /**
- * global state
+ * services
  * */
-import { Store } from '@ngrx/store';
-import * as SearchActions from '../../search-actions';
-import * as fromRoot from '../../reducers';
+import { EmployeeStoreService } from '../../services/employee-store.service';
 
 @Component({
   selector: 'app-area',
@@ -15,13 +13,14 @@ import * as fromRoot from '../../reducers';
 })
 export class AreaComponent implements OnInit {
   private serviceArea: boolean = true;
-  constructor(private store: Store<fromRoot.State>) { }
+  constructor(private employeeService: EmployeeStoreService) { }
 
   ngOnInit() {
   }
 
   updateArea(){
-    var area = this.serviceArea?"Kitchen": "Services";
-    this.store.dispatch(new SearchActions.UpdateArea(area));
+    var newArea = this.serviceArea?"Kitchen": "Services";
+
+    this.employeeService.updateArea(newArea);
   }
 }

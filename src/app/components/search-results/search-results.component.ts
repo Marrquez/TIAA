@@ -3,16 +3,9 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
 /**
- * models
+ * services
  * */
-import { Employee } from '../../models/Employee';
-
-/**
- * global state
- * */
-import { Store } from '@ngrx/store';
-import * as SearchActions from '../../search-actions';
-import * as fromRoot from '../../reducers';
+import { EmployeeStoreService } from '../../services/employee-store.service';
 
 @Component({
   selector: 'app-search-results',
@@ -20,20 +13,14 @@ import * as fromRoot from '../../reducers';
   styleUrls: ['./search-results.component.less']
 })
 export class SearchResultsComponent implements OnInit {
-  employees: Observable<Employee[]>;
-
   constructor(
-    private store: Store<fromRoot.State>,
+    private employeeService: EmployeeStoreService,
     private router: Router
-  ) {
-    this.employees = store.select(fromRoot.selectResults);
-  }
+  ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   addElement(){
     this.router.navigate(['new-edit', {}]);
-    //this.store.dispatch(new SearchActions.AddEmployee({id:1, volumeInfo: {title: "Hi Cristian"}}));
   };
 }

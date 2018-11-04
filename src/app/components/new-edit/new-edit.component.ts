@@ -34,6 +34,7 @@ export class NewEditComponent {
     console.log(this.loginForm.value);
     console.log(this.loginForm.status);
     // Attempt Logging in...
+    //this.store.dispatch(new SearchActions.AddEmployee({id:1, volumeInfo: {title: "Hi Cristian"}}));
   }
 
   add(){

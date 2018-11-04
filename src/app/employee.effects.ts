@@ -14,7 +14,7 @@ export class EmployeeEffects {
   search$: Observable<Action> = this.actions$.pipe(
     ofType(SearchActions.SEARCH),
     mergeMap((action: SearchActions.Search) =>
-      this.employeeService.searchEmployees(action.payload).pipe(
+      this.employeeService.getEmployees(action.payload).pipe(
         // If successful, dispatch success action with result
         map(data => new SearchActions.SearchSuccess(data)),
         // If request fails, dispatch failed action
