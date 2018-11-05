@@ -27,7 +27,6 @@ export class AreaComponent implements OnInit {
       this.employeeService.currentJobTitle = 'Manager';
     }
 
-
     this.employeeService.updateArea(newArea);
   }
 }

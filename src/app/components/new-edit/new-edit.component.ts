@@ -24,6 +24,7 @@ export class NewEditComponent {
   private sub: any;
   private viewType = 'new';
   private employeeId = '';
+  private pageTitle = 'New Employee';
   namesArray =  new FormArray([]);
 
   loginForm: FormGroup = this.builder.group({
@@ -51,7 +52,7 @@ export class NewEditComponent {
 
     this.sub = this.route.params.subscribe(params => {
       this.employeeId = params['employeeId'];
-      this.viewType = params['viewType'];
+      this.viewType = params['viewType'] ? params['viewType'] : 'new';
 
       if(this.viewType && this.viewType === 'view'){
         this.loginForm.disable();
@@ -75,17 +76,36 @@ export class NewEditComponent {
       this.loginForm.get('username').setValue(data.username);
       this.loginForm.get('hireDate').setValue(data.hireDate);
       this.loginForm.get('status').setValue(data.status);
-      this.employeeService.currentJobTitle = data.jobTitle;
       this.employeeService.currentArea = data.area;
+      this.employeeService.updateArea(data.area? "Services" : "Kitchen");
+      this.employeeService.currentJobTitle = data.jobTitle;
       this.employeeService.currentTipRate = data.tipRate;
+    }
+
+    this.setPageTitle();
+  }
+
+  setPageTitle(){
+    switch(this.viewType){
+      case 'view':
+        this.pageTitle = 'Employee Info';
+        break;
+
+      case 'edit':
+        this.pageTitle = 'Editing: ' + this.loginForm.get('name').value;
+        break;
+
+      default:
+        this.pageTitle = 'New Employee';
+        break;
     }
   }
 
 
-  createEmployee() {
+  createEditEmployee() {
     if(this.loginForm.status === 'VALID'){
       var newEmployee = this.loginForm.value;
-      newEmployee.id =  this.getID();
+      newEmployee.id = this.viewType === 'new' ? this.getID() : this.employeeId;
       newEmployee.jobTitle = this.employeeService.currentJobTitle;
       newEmployee.area = this.employeeService.currentArea;
       newEmployee.tipRate = this.employeeService.currentTipRate;
@@ -100,12 +120,6 @@ export class NewEditComponent {
 
   getID(){
     return  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  }
-
-  add(){
-    this.namesArray.push(
-      new FormControl(this.loginForm.get('jobTitle').value)
-    );
   }
 
   goBack(){

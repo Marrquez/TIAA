@@ -67,7 +67,21 @@ export function reducer(state = initialState, action: SearchActions.All): State 
       break;
 
     case SearchActions.ADD:
-      state.results.push(action.payload);
+
+      var emp = state.results.filter(function(e, index, arr){
+        if(e.id === action.payload.id){
+          arr[index] = action.payload;
+          return true;
+        }
+
+        return false;
+
+      })[0];
+
+      if(!emp){
+        state.results.push(action.payload);
+      }
+
       return state;
       break;
 
