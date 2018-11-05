@@ -18,4 +18,7 @@ export class JobTitleComponent implements OnInit {
 
   ngOnInit() { }
 
+  onChange(newValue){
+
+  }
 }

@@ -21,7 +21,11 @@ export class EmployeeStoreService {
   private API_PATH = 'https://www.googleapis.com/books/v1/volumes';
   jobTitlelist: Observable<Array<string>>;
   employees: Observable<Employee[]>;
+  employee: Observable<Employee>;
   count: Observable<number>;
+  currentJobTitle:string = 'Manager';
+  currentArea:boolean = true;
+  currentTipRate:number = 0;
 
   constructor(
     private http: Http,
@@ -30,6 +34,7 @@ export class EmployeeStoreService {
     this.jobTitlelist = store.select(fromRoot.selectJobTitle);
     this.employees = store.select(fromRoot.selectResults);
     this.count = store.select(fromRoot.selectCount);
+    this.employee = store.select(fromRoot.selectEmployee);
   }
 
   /**
@@ -54,6 +59,14 @@ export class EmployeeStoreService {
    * */
   addEmployee(emp: Employee){
     this.store.dispatch(new SearchActions.AddEmployee(emp));
+  }
+
+  /**
+   * to get a new element by id
+   * @params: {string: object id}
+   * */
+  getEmployee(id: string){
+    this.store.dispatch(new SearchActions.SearchEmployee(id));
   }
 
   /**

@@ -29,8 +29,4 @@ export class SearchBarComponent implements OnInit {
     var term = $event.target.value;
     this.employeeService.searchEmployees(term);
   };
-
-  addEmployee(){
-    this.router.navigate(['new-edit', {}]);
-  };
 }

@@ -1,4 +1,22 @@
-<label class="lbl" for="jobTitle">Job title</label>
-<select>
-  <option *ngFor="let jt of employeeService.jobTitlelist | async">{{jt}}</option>
-</select>
+
+<table>
+  <tbody>
+  <tr>
+    <td><label class="lbl" for="jobTitle">Job title</label></td>
+    <td>
+      <select [(ngModel)]="employeeService.currentJobTitle" (ngModelChange)="onChange($event)">
+        <option [ngValue]="jt" *ngFor="let jt of employeeService.jobTitlelist | async">{{jt}}</option>
+      </select>
+    </td>
+  </tr>
+  <tr class="optional-row" *ngIf="employeeService.currentJobTitle == 'Waitress'">
+    <td><label class="lbl" for="tipRate">Tip Rate</label></td>
+    <td><input [(ngModel)]="employeeService.currentTipRate" type="number" name="tipRate" id="tipRate"></td>
+  </tr>
+  </tbody>
+</table>
+
+
+
+
+

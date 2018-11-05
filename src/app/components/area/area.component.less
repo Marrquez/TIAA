@@ -53,3 +53,20 @@
     }
   }
 }
+
+:host.disabled {
+  .tabs {
+    pointer-events: none;
+
+    input[type=checkbox]:checked ~ span:nth-of-type(1),
+    input[type=checkbox] ~ span:nth-of-type(2) {
+      background: #ddd;
+      color: #666;
+    }
+
+    input[type=checkbox] ~ span:nth-of-type(1),
+    input[type=checkbox]:checked ~ span:nth-of-type(2) {
+      background: #fff;
+    }
+  }
+}

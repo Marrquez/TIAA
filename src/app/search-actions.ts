@@ -11,6 +11,7 @@ export const ADD = '[Employees] Add';
 export const UPDATE_AREA = '[Employees] Update Area';
 export const SEARCH_COUNTRIES = '[Employees] Search Countries';
 export const SEARCH_COUNTRIES_SUCCESS = '[Employees] Search Countries Success';
+export const SEARCH_EMPLOYEE= '[Employees] Search Employee';
 
 /**
  * Actions
@@ -39,6 +40,12 @@ export class SearchSuccess implements Action {
   constructor(public payload: Employee[]){};
 }
 
+export class SearchEmployee implements Action {
+  readonly type = SEARCH_EMPLOYEE;
+
+  constructor(public payload: string){};
+}
+
 export class AddEmployee implements Action {
   readonly type = ADD;
 
@@ -53,4 +60,4 @@ export class UpdateArea implements Action {
 
 export type All
   = Search
-   | SearchSuccess | AddEmployee | UpdateArea | SearchCountries | SearchCountriesSuccess;
+   | SearchSuccess | AddEmployee | UpdateArea | SearchCountries | SearchCountriesSuccess | SearchEmployee;

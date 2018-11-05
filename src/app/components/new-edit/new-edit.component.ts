@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
+/**
+ * models
+ * */
+import { Employee } from '../../models/Employee';
 
 /**
  * services
@@ -16,13 +21,15 @@ import { EmployeeStoreService } from '../../services/employee-store.service';
 export class NewEditComponent {
   private minAge:any = 18;
   private today = new Date();
+  private sub: any;
+  private viewType = 'new';
+  private employeeId = '';
   namesArray =  new FormArray([]);
 
   loginForm: FormGroup = this.builder.group({
     name: new FormControl('', Validators.required),
     dob: new FormControl(this.minAge, Validators.required),
     country: new FormControl('Afghanistan', Validators.required),
-    tipRate: new FormControl(0, Validators.required),
     username: new FormControl('', Validators.required),
     hireDate: new FormControl('', Validators.required),
     status:new FormControl(true, Validators.required),
@@ -33,20 +40,58 @@ export class NewEditComponent {
     private builder: FormBuilder,
     private router: Router,
     private countryService: CountryStoreService,
-    private employeeService: EmployeeStoreService
+    private employeeService: EmployeeStoreService,
+    private route: ActivatedRoute
   ) {
     this.minAge = new Date(this.today.getFullYear() - this.minAge, this.today.getMonth(), this.today.getDate());
   }
 
   ngOnInit() {
     this.countryService.searchCountries();
+
+    this.sub = this.route.params.subscribe(params => {
+      this.employeeId = params['employeeId'];
+      this.viewType = params['viewType'];
+
+      if(this.viewType && this.viewType === 'view'){
+        this.loginForm.disable();
+        this.getEmployeeById(this.employeeId);
+      }else if(this.viewType && this.viewType === 'edit'){
+        this.getEmployeeById(this.employeeId);
+      }
+    });
   }
+
+  getEmployeeById(id: string){
+    this.employeeService.getEmployee(id);
+    this.employeeService.employee.subscribe(data => this.updateFormData(data));
+  }
+
+  updateFormData(data: Employee){
+    if(data){
+      this.loginForm.get('name').setValue(data.name);
+      this.loginForm.get('dob').setValue(data.dob);
+      this.loginForm.get('country').setValue(data.country);
+      this.loginForm.get('username').setValue(data.username);
+      this.loginForm.get('hireDate').setValue(data.hireDate);
+      this.loginForm.get('status').setValue(data.status);
+      this.employeeService.currentJobTitle = data.jobTitle;
+      this.employeeService.currentArea = data.area;
+      this.employeeService.currentTipRate = data.tipRate;
+    }
+  }
+
 
   createEmployee() {
     if(this.loginForm.status === 'VALID'){
       var newEmployee = this.loginForm.value;
       newEmployee.id =  this.getID();
+      newEmployee.jobTitle = this.employeeService.currentJobTitle;
+      newEmployee.area = this.employeeService.currentArea;
+      newEmployee.tipRate = this.employeeService.currentTipRate;
+
       this.employeeService.addEmployee(newEmployee);
+
       this.router.navigate(['dashboard', {}]);
     }else{
       console.log("All fields are required");
@@ -65,5 +110,9 @@ export class NewEditComponent {
 
   goBack(){
     this.router.navigate(['dashboard', {}]);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

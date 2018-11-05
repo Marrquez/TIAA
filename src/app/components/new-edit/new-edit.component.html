@@ -10,7 +10,7 @@
         <input type="text" name="name" id="name" formControlName="name">
       </div>
       <div class="col-sm-6">
-        <app-area></app-area>
+        <app-area [ngClass]="{'disabled ': viewType === 'view' }"></app-area>
       </div>
     </div>
 
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <app-job-title></app-job-title>
+        <app-job-title [ngClass]="{'disabled ': viewType === 'view' }"></app-job-title>
       </div>
     </div>
 
@@ -32,12 +32,8 @@
       <div class="col-sm-6">
         <label class="lbl" for="country">Country</label>
         <select formControlName="country" name="country" id="country" >
-          <option *ngFor="let country of countryService.countries | async">{{ country.name }}</option>
+          <option [ngValue]="country.name" *ngFor="let country of countryService.countries | async">{{ country.name }}</option>
         </select>
-      </div>
-      <div class="col-sm-6">
-        <label class="lbl" for="tipRate">Tip Rate</label>
-        <input type="number" name="tipRate" id="tipRate" formControlName="tipRate">
       </div>
     </div>
 
@@ -80,7 +76,7 @@
     </div>
     <br>
     <button (click)="goBack();" type="button"><i class="fa fa-chevron-left"></i>Back</button>
-    <button type="submit" class="btn btn-sm btn-small btn-primary">Save</button>
+    <button *ngIf="viewType != 'view'" type="submit" class="btn btn-sm btn-small btn-primary">Save</button>
   </form>
 </div>
 

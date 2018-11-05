@@ -10,7 +10,8 @@ export interface State {
   results: Employee[],
   area: string,
   jobTitle: Array<string>,
-  countries: Country[]
+  countries: Country[],
+  employee: Employee
 };
 
 /**
@@ -21,7 +22,8 @@ const initialState: State = {
   results: [],
   area: 'Services',
   jobTitle: ["Manager", "Host", "Tuttofare", "Waitress", "Dining room manager"],
-  countries: []
+  countries: [],
+  employee: {id:'', name:'', dob: '', country: '', username: '', hireDate:'', status: true, tipRate: 0, jobTitle: '', area: true  }
 };
 
 export function reducer(state = initialState, action: SearchActions.All): State {
@@ -52,6 +54,17 @@ export function reducer(state = initialState, action: SearchActions.All): State 
         results: action.payload
       };
     break;
+
+    case SearchActions.SEARCH_EMPLOYEE:
+      var emp = state.results.filter(function(e){
+        return e.id === action.payload;
+      })[0];
+
+      return {
+        ...state,
+        employee: emp
+      };
+      break;
 
     case SearchActions.ADD:
       state.results.push(action.payload);

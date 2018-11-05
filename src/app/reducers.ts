@@ -13,6 +13,10 @@ export function selectResults(state: State) {
   return state.search.results;
 };
 
+export function selectEmployee(state: State) {
+  return state.search.employee;
+};
+
 export function selectCountries(state: State){
   return state.search.countries;
 }
