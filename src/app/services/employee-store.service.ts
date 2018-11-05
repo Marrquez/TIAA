@@ -18,6 +18,7 @@ import * as fromRoot from '../reducers';
 @Injectable()
 export class EmployeeStoreService {
   public searchText= '';
+  public sortColumn= 'name';
   private API_PATH = 'https://www.googleapis.com/books/v1/volumes';
   jobTitlelist: Observable<Array<string>>;
   employees: Observable<Employee[]>;

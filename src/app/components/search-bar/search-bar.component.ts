@@ -18,15 +18,5 @@ export class SearchBarComponent implements OnInit {
     private employeeService: EmployeeStoreService
   ) { };
 
-  ngOnInit() {
-  };
-
-  /**
-   * trigger: search event
-   * @params: {DOMElement: target element}
-   * */
-  onSearch($event){
-    var term = $event.target.value;
-    this.employeeService.searchEmployees(term);
-  };
+  ngOnInit() { };
 }

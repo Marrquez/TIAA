@@ -18,6 +18,7 @@ import { EmployeeStoreService } from '../../services/employee-store.service';
   styleUrls: ['./search-results.component.less']
 })
 export class SearchResultsComponent implements OnInit {
+  private sCol:string = 'name';
   constructor(
     private employeeService: EmployeeStoreService,
     private router: Router
@@ -40,4 +41,16 @@ export class SearchResultsComponent implements OnInit {
   deleteEmployee(emp: Employee){
     console.log(emp);
   };
+
+  sortColumn(columnId: string){
+    var sortType = "";
+
+    if(this.employeeService.sortColumn.charAt(0) != "!"){
+      if(this.employeeService.sortColumn === columnId){
+        sortType = "!";
+      }
+    }
+
+    this.employeeService.sortColumn = this.sCol = sortType + columnId;
+  }
 }

@@ -1,6 +1,6 @@
 <div>
   <input type="text"
-         placeholder="Search by name"
-         (keyup)="onSearch($event)">
+         [(ngModel)]="employeeService.searchText"
+         placeholder="Search by name">
   <i class="fa fa-search"></i>
 </div>

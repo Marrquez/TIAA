@@ -8,16 +8,16 @@
   <table>
     <thead>
     <tr>
-      <th class="col-sm-2">Name</th>
-      <th class="col-sm-2">Age</th>
-      <th class="col-sm-2">Username</th>
-      <th class="col-sm-2">Hire Date</th>
+      <th class="col-sm-2" [ngClass]="{'sorted': sCol.substr(1) === 'name' || sCol.substr(0) === 'name', 'asc': (sCol.substr(1) === 'name' || sCol.substr(0) === 'name') && sCol[0] != '!'}" (click)="sortColumn('name')">Name<br />(Job Title) <i class="fa fa-sort"></i></th>
+      <th class="col-sm-2" [ngClass]="{'sorted': sCol.substr(1) === 'dob' || sCol.substr(0) === 'dob', 'asc': (sCol.substr(1) === 'dob' || sCol.substr(0) === 'dob') && sCol[0] != '!'}" (click)="sortColumn('dob')">Age <i class="fa fa-sort"></i></th>
+      <th class="col-sm-2" [ngClass]="{'sorted': sCol.substr(1) === 'username' || sCol.substr(0) === 'username', 'asc': (sCol.substr(1) === 'username' || sCol.substr(0) === 'username') && sCol[0] != '!'}" (click)="sortColumn('username')">Username <i class="fa fa-sort"></i></th>
+      <th class="col-sm-2" [ngClass]="{'sorted': sCol.substr(1) === 'hireDate' || sCol.substr(0) === 'hireDate', 'asc': (sCol.substr(1) === 'hireDate' || sCol.substr(0) === 'hireDate') && sCol[0] != '!'}" (click)="sortColumn('hireDate')">Hire Date <i class="fa fa-sort"></i></th>
       <th class="col-sm-2"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let e of employeeService.employees | async">
-      <td>{{ e.name }}</td>
+    <tr *ngFor="let e of employeeService.employees | async | filter: employeeService.searchText | orderBy: employeeService.sortColumn">
+      <td>{{ e.name }}<br /> {{ e.jobTitle }}</td>
       <td align="center">{{ e.dob | calculateAge }}</td>
       <td align="center">{{ e.username }}</td>
       <td align="center">{{ e.hireDate | date: 'dd/MM/yyyy' }}</td>
@@ -29,6 +29,8 @@
     </tr>
     </tbody>
   </table>
+  <br>
+  <br>
   <br>
   <br>
   <button class="btn btn-small btn-primary" (click)="addEmployee();">+ add employee</button>

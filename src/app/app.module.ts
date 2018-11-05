@@ -28,9 +28,11 @@ import { CountryStoreService } from './services/country-store.service';
  * pipes
  * */
 import { CalculateAgePipe } from './pipes/calculate-age.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 /**
- * external components
+ * customs and externals components
  * */
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers';
@@ -52,7 +54,9 @@ import { AreaComponent } from './components/area/area.component';
     SearchResultsComponent,
     JobTitleComponent,
     AreaComponent,
-    CalculateAgePipe
+    CalculateAgePipe,
+    FilterPipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
