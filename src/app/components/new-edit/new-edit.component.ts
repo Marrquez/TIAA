@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
  * services
  * */
 import { CountryStoreService } from '../../services/country-store.service';
+import { EmployeeStoreService } from '../../services/employee-store.service';
 
 @Component({
   selector: 'new-edit',
@@ -18,20 +19,21 @@ export class NewEditComponent {
   namesArray =  new FormArray([]);
 
   loginForm: FormGroup = this.builder.group({
-    name: new FormControl(''),
-    dob: new FormControl(''),
-    country: new FormControl(''),
-    tipRate: new FormControl(''),
-    username: new FormControl(''),
-    hireDate: new FormControl(''),
-    status:new FormControl({value: 'n/a', disabled: false}),
+    name: new FormControl('', Validators.required),
+    dob: new FormControl(this.minAge, Validators.required),
+    country: new FormControl('Afghanistan', Validators.required),
+    tipRate: new FormControl(0, Validators.required),
+    username: new FormControl('', Validators.required),
+    hireDate: new FormControl('', Validators.required),
+    status:new FormControl(true, Validators.required),
     names: this.namesArray
   });
 
   constructor (
     private builder: FormBuilder,
     private router: Router,
-    private countryService: CountryStoreService
+    private countryService: CountryStoreService,
+    private employeeService: EmployeeStoreService
   ) {
     this.minAge = new Date(this.today.getFullYear() - this.minAge, this.today.getMonth(), this.today.getDate());
   }
@@ -40,11 +42,19 @@ export class NewEditComponent {
     this.countryService.searchCountries();
   }
 
-  login() {
-    console.log(this.loginForm.value);
-    console.log(this.loginForm.status);
+  createEmployee() {
+    if(this.loginForm.status === 'VALID'){
+      var newEmployee = this.loginForm.value;
+      newEmployee.id =  this.getID();
+      this.employeeService.addEmployee(newEmployee);
+      this.router.navigate(['dashboard', {}]);
+    }else{
+      console.log("All fields are required");
+    }
+  }
 
-    //this.store.dispatch(new SearchActions.AddEmployee({id:1, volumeInfo: {title: "Hi Cristian"}}));
+  getID(){
+    return  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
   add(){

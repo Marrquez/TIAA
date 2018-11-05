@@ -1,10 +1,22 @@
 :host {
   .search-results-container {
-    display: none;
-
     table {
+      th{
+        border-bottom: 1px solid #bbb;
+        color: #333;
+        font-size: 12px;
+        height: 40px;
+        line-height: 40px;
+        max-width: 350px;
+        min-width: 120px;
+      }
+      th:not(:first-child),
+      td:not(:first-child) {
+        text-align: center;
+      }
       tr {
         td {
+          color: #666;
           padding: 3px;
           position:relative;
 
@@ -16,6 +28,18 @@
             text-align: center;
             width: 25px;
           }
+
+          i.fa-pen {
+            color: #22B66B;
+          }
+
+          i.fa-trash {
+            color: #E25642;
+          }
+
+          i.fa-eye {
+            color: #239BCC;
+          }
         }
 
         .actions {
@@ -23,10 +47,9 @@
         }
       }
     }
-  }
-}
-:host-context(.int) {
-  .search-results-container {
-    display: block;
+
+    button {
+      background: #239BCC;
+    }
   }
 }

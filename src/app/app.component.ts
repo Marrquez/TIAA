@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
 
-/**
- * services
- * */
-import { EmployeeStoreService } from './services/employee-store.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +8,5 @@ import { EmployeeStoreService } from './services/employee-store.service';
 export class AppComponent {
   title = 'TIAA';
 
-  constructor(
-    private employeeService: EmployeeStoreService
-  ){ };
+  constructor( ){ };
 }

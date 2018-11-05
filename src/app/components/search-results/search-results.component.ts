@@ -3,6 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
 /**
+ * models
+ * */
+import { Employee } from '../../models/Employee';
+
+/**
  * services
  * */
 import { EmployeeStoreService } from '../../services/employee-store.service';
@@ -20,7 +25,19 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() { }
 
-  addElement(){
+  addEmployee(){
     this.router.navigate(['new-edit', {}]);
+  };
+
+  editEmployee(emp: Employee){
+    this.router.navigate(['new-edit', {viewType: 'edit', employeeId: emp.id}]);
+  };
+
+  viewEmployee(emp: Employee){
+    this.router.navigate(['new-edit', {viewType: 'view', employeeId: emp.id}]);
+  };
+
+  deleteEmployee(emp: Employee){
+    console.log(emp);
   };
 }

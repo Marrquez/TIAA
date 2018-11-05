@@ -3,7 +3,7 @@
   <br>
   <h3>New Employee / Editing: ...</h3>
   <br>
-  <form [formGroup]="loginForm" role="form" (ngSubmit)="login()">
+  <form [formGroup]="loginForm" role="form" (ngSubmit)="createEmployee()">
     <div class="form-group row">
       <div class="col-sm-6">
         <label class="lbl" for="name">Name</label>
@@ -82,7 +82,5 @@
     <button (click)="goBack();" type="button"><i class="fa fa-chevron-left"></i>Back</button>
     <button type="submit" class="btn btn-sm btn-small btn-primary">Save</button>
   </form>
-
-  <button (click)="add()">Add</button>
 </div>
 

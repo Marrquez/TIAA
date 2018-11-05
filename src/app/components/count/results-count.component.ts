@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 /**
- * global state
+ * services
  * */
-import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
+import { EmployeeStoreService } from '../../services/employee-store.service';
 
 @Component({
   selector: 'app-results-count',
@@ -13,13 +12,7 @@ import * as fromRoot from '../../reducers';
   styleUrls: ['./results-count.component.less']
 })
 export class ResultsCountComponent implements OnInit {
-  count: Observable<number>;
+  constructor(private employeeService: EmployeeStoreService) { }
 
-  constructor(private store: Store<fromRoot.State>) {
-    this.count = store.select(fromRoot.selectCount);
-  }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }

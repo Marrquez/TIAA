@@ -25,6 +25,11 @@ import { EmployeeStoreService } from './services/employee-store.service';
 import { CountryStoreService } from './services/country-store.service';
 
 /**
+ * pipes
+ * */
+import { CalculateAgePipe } from './pipes/calculate-age.pipe';
+
+/**
  * external components
  * */
 import { StoreModule } from '@ngrx/store';
@@ -46,7 +51,8 @@ import { AreaComponent } from './components/area/area.component';
     SearchBarComponent,
     SearchResultsComponent,
     JobTitleComponent,
-    AreaComponent
+    AreaComponent,
+    CalculateAgePipe
   ],
   imports: [
     BrowserModule,

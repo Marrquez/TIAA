@@ -1,28 +1,36 @@
-<div class="search-results-container">
+<div class="search-results-container container">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <table>
     <thead>
     <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Username</th>
-      <th>Hire Date</th>
-      <th></th>
+      <th class="col-sm-2">Name</th>
+      <th class="col-sm-2">Age</th>
+      <th class="col-sm-2">Username</th>
+      <th class="col-sm-2">Hire Date</th>
+      <th class="col-sm-2"></th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let e of employeeService.employees | async">
-      <td>{{ e.volumeInfo.title }}</td>
-      <td>40</td>
-      <td>juanp</td>
-      <td>2017/10/01</td>
+      <td>{{ e.name }}</td>
+      <td align="center">{{ e.dob | calculateAge }}</td>
+      <td align="center">{{ e.username }}</td>
+      <td align="center">{{ e.hireDate | date: 'dd/MM/yyyy' }}</td>
       <td class="actions">
-        <i class="fa fa-pen"></i>
-        <i class="fa fa-eye"></i>
-        <i class="fa fa-trash"></i>
+        <i class="fa fa-pen" (click)="editEmployee(e);"></i>
+        <i class="fa fa-eye" (click)="viewEmployee(e);"></i>
+        <i class="fa fa-trash" (click)="deleteEmployee(e);"></i>
       </td>
     </tr>
     </tbody>
   </table>
-  <button (click)="addElement();">+ add employee</button>
+  <br>
+  <br>
+  <button class="btn btn-small btn-primary" (click)="addEmployee();">+ add employee</button>
 </div>
 

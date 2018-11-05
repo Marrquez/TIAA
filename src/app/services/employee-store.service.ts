@@ -21,6 +21,7 @@ export class EmployeeStoreService {
   private API_PATH = 'https://www.googleapis.com/books/v1/volumes';
   jobTitlelist: Observable<Array<string>>;
   employees: Observable<Employee[]>;
+  count: Observable<number>;
 
   constructor(
     private http: Http,
@@ -28,6 +29,7 @@ export class EmployeeStoreService {
   ) {
     this.jobTitlelist = store.select(fromRoot.selectJobTitle);
     this.employees = store.select(fromRoot.selectResults);
+    this.count = store.select(fromRoot.selectCount);
   }
 
   /**
@@ -50,7 +52,9 @@ export class EmployeeStoreService {
    * to add a new element
    * @params: {object: new element data}
    * */
-
+  addEmployee(emp: Employee){
+    this.store.dispatch(new SearchActions.AddEmployee(emp));
+  }
 
   /**
    * Only for test the Globlal store and State

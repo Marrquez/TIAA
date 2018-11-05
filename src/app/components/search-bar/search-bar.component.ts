@@ -30,7 +30,7 @@ export class SearchBarComponent implements OnInit {
     this.employeeService.searchEmployees(term);
   };
 
-  addElement(){
+  addEmployee(){
     this.router.navigate(['new-edit', {}]);
   };
 }
