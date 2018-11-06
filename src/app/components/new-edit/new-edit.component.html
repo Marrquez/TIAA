@@ -67,13 +67,15 @@
         </label>
       </div>
     </div>
-
     <div *ngIf="!myForm.form.valid && viewType != 'view'">
-      <span class="error-msg">All fields are required</span>
+      <span class="error-msg">please remember: *All fields are required</span>
+      <span class="error-msg"> *Date fields should have a correct format</span>
+      <span class="error-msg"> *Dob require a valid date</span>
     </div>
     <br>
     <button (click)="goBack();" type="button"><i class="fa fa-chevron-left"></i>Back</button>
     <button *ngIf="viewType != 'view'" [disabled]="!myForm.form.valid" type="submit" class="btn btn-sm btn-small btn-primary">Save</button>
+    <br>
   </form>
 </div>
 
