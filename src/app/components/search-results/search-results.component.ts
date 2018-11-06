@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 /**
  * models
@@ -12,6 +13,13 @@ import { Employee } from '../../models/Employee';
  * */
 import { EmployeeStoreService } from '../../services/employee-store.service';
 
+/**
+ * confirm dialog data
+ * */
+export interface DialogData {
+  employee: Employee;
+}
+
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
@@ -21,7 +29,8 @@ export class SearchResultsComponent implements OnInit {
   private sCol:string = 'name';
   constructor(
     private employeeService: EmployeeStoreService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() { }
@@ -39,7 +48,14 @@ export class SearchResultsComponent implements OnInit {
   };
 
   deleteEmployee(emp: Employee){
-    console.log(emp);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: {employee: emp}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   };
 
   sortColumn(columnId: string){
@@ -52,5 +68,28 @@ export class SearchResultsComponent implements OnInit {
     }
 
     this.employeeService.sortColumn = this.sCol = sortType + columnId;
+  }
+}
+
+@Component({
+  selector: 'confirm-dialog',
+  templateUrl: 'confirm-dialog.html',
+  styleUrls: ['./confirm-dialog.component.less']
+})
+export class ConfirmDialogComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private employeeService: EmployeeStoreService
+    ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  deleteEmployee(id:string){
+    this.employeeService.deleteEmployee(id);
+    this.dialogRef.close();
   }
 }

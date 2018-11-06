@@ -66,6 +66,17 @@ export function reducer(state = initialState, action: SearchActions.All): State 
       };
       break;
 
+    case SearchActions.DELETE_EMPLOYEE:
+      var res = state.results.filter(function(e){
+        return e.id != action.payload;
+      });
+
+      return {
+        ...state,
+        results: res
+      };
+      break;
+
     case SearchActions.ADD:
 
       var emp = state.results.filter(function(e, index, arr){

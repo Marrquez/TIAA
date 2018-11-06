@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +41,7 @@ import { ResultsCountComponent } from './components/count/results-count.componen
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './employee.effects';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { ConfirmDialogComponent } from './components/search-results/search-results.component';
 import { JobTitleComponent } from './components/job-title/job-title.component';
 import { AreaComponent } from './components/area/area.component';
 
@@ -56,7 +58,11 @@ import { AreaComponent } from './components/area/area.component';
     AreaComponent,
     CalculateAgePipe,
     FilterPipe,
-    OrderByPipe
+    OrderByPipe,
+    ConfirmDialogComponent
+  ],
+  entryComponents: [
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -68,13 +74,15 @@ import { AreaComponent } from './components/area/area.component';
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [
     EmployeeStoreService,
     CountryStoreService,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatDialogModule
   ],
   bootstrap: [AppComponent]
 })

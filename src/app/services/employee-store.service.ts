@@ -71,6 +71,14 @@ export class EmployeeStoreService {
   }
 
   /**
+   * to delte the employee with id
+   * @params: {string: object id}
+   * */
+  deleteEmployee(id: string){
+    this.store.dispatch(new SearchActions.DeleteEmployee(id));
+  }
+
+  /**
    * Only for test the Globlal store and State
    * @params: {string: string to find}
    * */
