@@ -27,26 +27,46 @@ export interface DialogData {
 })
 export class SearchResultsComponent implements OnInit {
   private sCol:string = 'name';
+  private showBanner:boolean = true;
   constructor(
     private employeeService: EmployeeStoreService,
     private router: Router,
     public dialog: MatDialog
-  ) { }
+  ) {
+    this.employeeService.employees.subscribe(data =>
+      this.showBanner = data.length > 0
+    );
+  }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
+  /**
+   * navigate to new-edit view
+  * */
   addEmployee(){
     this.router.navigate(['new-edit', {}]);
   };
 
-  editEmployee(emp: Employee){
-    this.router.navigate(['new-edit', {viewType: 'edit', employeeId: emp.id}]);
+  /**
+   * action: navigate to edit view mode
+   * @params: {id: employee id}
+   * */
+  editEmployee(id: string){
+    this.router.navigate(['new-edit', {viewType: 'edit', employeeId: id}]);
   };
 
-  viewEmployee(emp: Employee){
-    this.router.navigate(['new-edit', {viewType: 'view', employeeId: emp.id}]);
+  /**
+   * action: navigate to view mode
+   * @params: {id: employee id}
+   * */
+  viewEmployee(id: string){
+    this.router.navigate(['new-edit', {viewType: 'view', employeeId: id}]);
   };
 
+  /**
+   * delete the given employee
+   * @params: {employee: employee data}
+   * */
   deleteEmployee(emp: Employee){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
@@ -58,6 +78,10 @@ export class SearchResultsComponent implements OnInit {
     });
   };
 
+  /**
+   * sort by selected column
+   * @params: {column: column id}
+   * */
   sortColumn(columnId: string){
     var sortType = "";
 
@@ -77,7 +101,6 @@ export class SearchResultsComponent implements OnInit {
   styleUrls: ['./confirm-dialog.component.less']
 })
 export class ConfirmDialogComponent {
-
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,

@@ -10,20 +10,6 @@ import { CountryStoreService } from './services/country-store.service';
 
 @Injectable()
 export class EmployeeEffects {
-  // Listen for the 'SEARCH' action
-  @Effect()
-  search$: Observable<Action> = this.actions$.pipe(
-    ofType(SearchActions.SEARCH),
-    mergeMap((action: SearchActions.Search) =>
-      this.employeeService.getEmployees(action.payload).pipe(
-        // If successful, dispatch success action with result
-        map(data => new SearchActions.SearchSuccess(data)),
-        // If request fails, dispatch failed action
-        catchError(() => of({ type: 'FAILED' }))
-      )
-    )
-  );
-
   @Effect()
   search_countries$: Observable<Action> = this.actions$.pipe(
     ofType(SearchActions.SEARCH_COUNTRIES),

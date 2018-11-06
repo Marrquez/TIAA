@@ -14,7 +14,6 @@ import { HttpModule } from '@angular/http';
 /**
  * custom components
  * */
-import { BaseComponent } from './components/base/base.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NewEditComponent } from './components/new-edit/new-edit.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -37,7 +36,6 @@ import { OrderByPipe } from './pipes/order-by.pipe';
  * */
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers';
-import { ResultsCountComponent } from './components/count/results-count.component';
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './employee.effects';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
@@ -48,10 +46,8 @@ import { AreaComponent } from './components/area/area.component';
 @NgModule({
   declarations: [
     AppComponent,
-    BaseComponent,
     DashboardComponent,
     NewEditComponent,
-    ResultsCountComponent,
     SearchBarComponent,
     SearchResultsComponent,
     JobTitleComponent,

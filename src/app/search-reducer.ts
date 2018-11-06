@@ -6,7 +6,6 @@ import * as SearchActions from './search-actions';
  * the reducer state
  * */
 export interface State {
-  searchTerms: string,
   results: Employee[],
   area: string,
   jobTitle: Array<string>,
@@ -18,7 +17,6 @@ export interface State {
  * the reducer initial state
  * */
 const initialState: State = {
-  searchTerms: '',
   results: [],
   area: 'Services',
   jobTitle: ["Manager", "Host", "Tuttofare", "Waitress", "Dining room manager"],
@@ -28,13 +26,6 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: SearchActions.All): State {
   switch (action.type) {
-    case SearchActions.SEARCH:
-      return {
-        ...state,
-        searchTerms: action.payload
-      };
-    break;
-
     case SearchActions.SEARCH_COUNTRIES:
       return {
         ...state
@@ -47,13 +38,6 @@ export function reducer(state = initialState, action: SearchActions.All): State 
         countries: action.payload
       };
       break;
-
-    case SearchActions.SEARCH_SUCCESS:
-      return {
-        ...state,
-        results: action.payload
-      };
-    break;
 
     case SearchActions.SEARCH_EMPLOYEE:
       var emp = state.results.filter(function(e){
@@ -77,8 +61,7 @@ export function reducer(state = initialState, action: SearchActions.All): State 
       };
       break;
 
-    case SearchActions.ADD:
-
+    case SearchActions.ADD_EMPLOYEE:
       var emp = state.results.filter(function(e, index, arr){
         if(e.id === action.payload.id){
           arr[index] = action.payload;

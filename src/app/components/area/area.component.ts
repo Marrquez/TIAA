@@ -12,12 +12,14 @@ import { EmployeeStoreService } from '../../services/employee-store.service';
   styleUrls: ['./area.component.less']
 })
 export class AreaComponent implements OnInit {
-  //private serviceArea: boolean = true;
   constructor(private employeeService: EmployeeStoreService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  /**
+   * toggle the current area value and update the Job title list
+   * @params: void
+   * */
   updateArea(){
     var newArea = "Services";
     if(this.employeeService.currentArea){

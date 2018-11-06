@@ -25,7 +25,6 @@ export class NewEditComponent {
   private viewType = 'new';
   private employeeId = '';
   private pageTitle = 'New Employee';
-  namesArray =  new FormArray([]);
 
   loginForm: FormGroup = this.builder.group({
     name: new FormControl('', Validators.required),
@@ -33,8 +32,7 @@ export class NewEditComponent {
     country: new FormControl('Afghanistan', Validators.required),
     username: new FormControl('', Validators.required),
     hireDate: new FormControl('', Validators.required),
-    status:new FormControl(true, Validators.required),
-    names: this.namesArray
+    status:new FormControl(true, Validators.required)
   });
 
   constructor (
@@ -47,9 +45,11 @@ export class NewEditComponent {
     this.minAge = new Date(this.today.getFullYear() - this.minAge, this.today.getMonth(), this.today.getDate());
   }
 
+  /**
+   * For view and edit views get the employee data
+   * @params: {id: employee id, type: view type}
+  * */
   ngOnInit() {
-    this.countryService.searchCountries();
-
     this.sub = this.route.params.subscribe(params => {
       this.employeeId = params['employeeId'];
       this.viewType = params['viewType'] ? params['viewType'] : 'new';
@@ -63,11 +63,19 @@ export class NewEditComponent {
     });
   }
 
+  /**
+   * get the employee data from the store and call update template func
+   * @params: {id: employee id}
+   * */
   getEmployeeById(id: string){
     this.employeeService.getEmployee(id);
     this.employeeService.employee.subscribe(data => this.updateFormData(data));
   }
 
+  /**
+   * update the template data with the employee data
+   * @params: {employee: employee data}
+   * */
   updateFormData(data: Employee){
     if(data){
       this.loginForm.get('name').setValue(data.name);
@@ -85,6 +93,9 @@ export class NewEditComponent {
     this.setPageTitle();
   }
 
+  /**
+   * update the view title based on the type of view
+  * */
   setPageTitle(){
     switch(this.viewType){
       case 'view':
@@ -101,7 +112,9 @@ export class NewEditComponent {
     }
   }
 
-
+  /**
+   * create a new employee or update the current one
+   * */
   createEditEmployee() {
     if(this.loginForm.status === 'VALID'){
       var newEmployee = this.loginForm.value;
@@ -118,14 +131,23 @@ export class NewEditComponent {
     }
   }
 
+  /**
+   * generate a random UID for a new employee
+   * */
   getID(){
     return  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
+  /**
+   * navigate back
+   * */
   goBack(){
     this.router.navigate(['dashboard', {}]);
   }
 
+  /**
+   * unsuscibe events
+   * */
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

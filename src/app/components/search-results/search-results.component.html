@@ -5,7 +5,11 @@
   <br>
   <br>
   <br>
-  <table>
+  <div class="banner" *ngIf="!showBanner">
+    <span>Welcome!</span>
+    <p>No records! Try adding some.</p>
+  </div>
+  <table *ngIf="showBanner">
     <thead>
     <tr>
       <th class="col-sm-2" [ngClass]="{'sorted': sCol.substr(1) === 'name' || sCol.substr(0) === 'name', 'asc': (sCol.substr(1) === 'name' || sCol.substr(0) === 'name') && sCol[0] != '!'}" (click)="sortColumn('name')">Name<br />(Job Title) <i class="fa fa-sort"></i></th>
@@ -17,13 +21,13 @@
     </thead>
     <tbody>
     <tr *ngFor="let e of employeeService.employees | async | filter: employeeService.searchText | orderBy: employeeService.sortColumn">
-      <td>{{ e.name }}<br /> {{ e.jobTitle }}</td>
+      <td>{{ e.name }}<br /> <i>{{ e.jobTitle }}</i></td>
       <td align="center">{{ e.dob | calculateAge }}</td>
       <td align="center">{{ e.username }}</td>
       <td align="center">{{ e.hireDate | date: 'dd/MM/yyyy' }}</td>
       <td class="actions">
-        <i class="fa fa-pen" (click)="editEmployee(e);"></i>
-        <i class="fa fa-eye" (click)="viewEmployee(e);"></i>
+        <i class="fa fa-pen" (click)="editEmployee(e.id);"></i>
+        <i class="fa fa-eye" (click)="viewEmployee(e.id);"></i>
         <i class="fa fa-trash" (click)="deleteEmployee(e);"></i>
       </td>
     </tr>

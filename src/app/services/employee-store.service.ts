@@ -17,13 +17,13 @@ import * as fromRoot from '../reducers';
 
 @Injectable()
 export class EmployeeStoreService {
-  public searchText= '';
-  public sortColumn= 'name';
+  public searchText = '';
+  public sortColumn = 'name';
+  public showBanner = true;
   private API_PATH = 'https://www.googleapis.com/books/v1/volumes';
   jobTitlelist: Observable<Array<string>>;
   employees: Observable<Employee[]>;
   employee: Observable<Employee>;
-  count: Observable<number>;
   currentJobTitle:string = 'Manager';
   currentArea:boolean = true;
   currentTipRate:number = 0;
@@ -34,7 +34,6 @@ export class EmployeeStoreService {
   ) {
     this.jobTitlelist = store.select(fromRoot.selectJobTitle);
     this.employees = store.select(fromRoot.selectResults);
-    this.count = store.select(fromRoot.selectCount);
     this.employee = store.select(fromRoot.selectEmployee);
   }
 
@@ -44,14 +43,6 @@ export class EmployeeStoreService {
    * */
   updateArea(newArea:string){
     this.store.dispatch(new SearchActions.UpdateArea(newArea));
-  }
-
-  /**
-   * To find employees with the term
-   * @params:{string: term to find}
-   * */
-  searchEmployees(term) {
-    this.store.dispatch(new SearchActions.Search(term));
   }
 
   /**
@@ -76,18 +67,5 @@ export class EmployeeStoreService {
    * */
   deleteEmployee(id: string){
     this.store.dispatch(new SearchActions.DeleteEmployee(id));
-  }
-
-  /**
-   * Only for test the Globlal store and State
-   * @params: {string: string to find}
-   * */
-  getEmployees(queryTitle: string): Observable<Employee[]> {
-    this.searchText = queryTitle;
-    return this.http.get(`${this.API_PATH}?q=${queryTitle}`)
-      .map(
-        res =>
-          res.json().items || []
-      );
   }
 }

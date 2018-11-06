@@ -5,9 +5,7 @@ import { Country } from './models/Country'
 /**
  * action types
  * */
-export const SEARCH = '[Employees] Search';
-export const SEARCH_SUCCESS = '[Employees] Search Success';
-export const ADD = '[Employees] Add';
+export const ADD_EMPLOYEE = '[Employees] Add Employee';
 export const UPDATE_AREA = '[Employees] Update Area';
 export const SEARCH_COUNTRIES = '[Employees] Search Countries';
 export const SEARCH_COUNTRIES_SUCCESS = '[Employees] Search Countries Success';
@@ -17,12 +15,6 @@ export const DELETE_EMPLOYEE= '[Employees] Delete Employee';
 /**
  * Actions
  * */
-export class Search implements Action {
-  readonly type = SEARCH;
-
-  constructor(public payload: string){};
-}
-
 export class SearchCountries implements Action {
   readonly type = SEARCH_COUNTRIES;
 
@@ -33,12 +25,6 @@ export class SearchCountriesSuccess implements Action {
   readonly type = SEARCH_COUNTRIES_SUCCESS;
 
   constructor(public payload: Country[]){};
-}
-
-export class SearchSuccess implements Action {
-  readonly type = SEARCH_SUCCESS;
-
-  constructor(public payload: Employee[]){};
 }
 
 export class SearchEmployee implements Action {
@@ -54,7 +40,7 @@ export class DeleteEmployee implements Action {
 }
 
 export class AddEmployee implements Action {
-  readonly type = ADD;
+  readonly type = ADD_EMPLOYEE;
 
   constructor(public payload: Employee){};
 }
@@ -66,5 +52,4 @@ export class UpdateArea implements Action {
 }
 
 export type All
-  = Search
-   | SearchSuccess | AddEmployee | UpdateArea | SearchCountries | SearchCountriesSuccess | SearchEmployee | DeleteEmployee;
+  = AddEmployee | UpdateArea | SearchCountries | SearchCountriesSuccess | SearchEmployee | DeleteEmployee;

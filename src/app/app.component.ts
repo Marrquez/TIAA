@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+/**
+ * services
+ * */
+import { CountryStoreService } from './services/country-store.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,5 +13,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'TIAA';
 
-  constructor( ){ };
+  constructor( private countryService: CountryStoreService ){ };
+
+  ngOnInit(){
+    this.countryService.searchCountries();
+  }
 }
