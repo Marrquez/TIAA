@@ -13,7 +13,7 @@
         <app-area [ngClass]="{'disabled ': viewType === 'view' }"></app-area>
       </div>
     </div>
-
+    <hr>
     <div class="form-group row">
       <div class="col-sm-6">
         <label class="lbl" for="dob">Dob</label>
@@ -56,7 +56,6 @@
       </div>
       <div class="col-sm-6"></div>
     </div>
-
     <div class="form-group row">
       <div class="col-sm-6">
         <label class="lbl" for="status">Status</label>
@@ -67,8 +66,9 @@
         </label>
       </div>
     </div>
+    <hr>
     <div *ngIf="!myForm.form.valid && viewType != 'view'">
-      <span class="error-msg">please remember: *All fields are required</span>
+      <span class="error-msg">remember: *All fields are required</span>
       <span class="error-msg"> *Date fields should have a correct format</span>
       <span class="error-msg"> *Dob require a valid date</span>
     </div>
